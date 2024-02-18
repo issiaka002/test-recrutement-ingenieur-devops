@@ -1,0 +1,26 @@
+## Recuperer la version d'une ressource k8s
+kubectl api—resources | grep <nom_ressource>
+
+## Test base de donnée
+kubectl exec -it --namespace=db postgres-db-0 -- psql -h localhost -U root --password -p 5432 postgres-db
+
+## Create docker registry secret
+k create secret docker-registry --namespace=app regsecret --docker-server=system.registry.eneci.net --docker-username=data354test --docker-password=2jYdk3G9
+
+## Check docker registry secret
+k get secret -n app appsecret --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+
+## Ajouter mon email dans le fichier /app/data/mail.txt
+k exec <pods-name> -- sh -c 'echo "issiaka.sidibe19@inphb.ci" > /app/data/mail.txt'
+k exec -ti <pods-name> -- sh
+
+## Requete POST pour recuperer les codes
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Apikey: issiaka.sidibe19@inphb.ci" \
+  http://192.168.49.2:32515/codes
+
+
+# Les codes recuperere
+{"code1":"UOkhi-zjjzrbr.jzuzsv19@zegys.tz-gfjkxivj-us-jvimztv","code2":"HLR96-pzzphrh.zpkpil19@puwoi.jp-wvzanylz-ki-zlycpjl"}
+{"code1":"UOkhi-zjjzrbr.jzuzsv19@zegys.tz-gfjkxivj-us-jvimztv","code2":"HLR96-pzzphrh.zpkpil19@puwoi.jp-wvzanylz-ki-zlycpjl"}

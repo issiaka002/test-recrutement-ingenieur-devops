@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: app
+data:
+  host: postgres-db-service.db.svc.cluster.local
+  dbName: postgres-db
+  pgdata: /var/lib/postgresql/data
+  port: "5432"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secrets
+  namespace: app
+data:
+  username: cm9vdA==
+  password: cm9vdA==

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-test
+  namespace: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-test
+  template:
+    metadata:
+      labels:
+        app: app-test
+    spec:
+      containers:
+      - name: app-test
+        image: system.registry.eneci.net/app-test
+        ports:
+        - containerPort: 8080
+        env:
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: host
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: port
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: dbName
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: password
+      imagePullSecrets:
+      - name: regsecret
