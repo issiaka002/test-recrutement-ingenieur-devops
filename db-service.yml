@@ -1,3 +1,4 @@
+# Définition du Service pour PostgreSQL
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,9 +9,13 @@ metadata:
     tier: database
 spec:
   ports:
+    # Définition du port sur lequel le service écoute
     - port: 5432
+      # Port cible sur les pods correspondants
       targetPort: 5432
   selector:       
+    # Sélection des pods correspondants avec les labels spécifiés
     app: postgres-db
     tier: database
-  clusterIP: None  
+  # ClusterIP None signifie que ce service n'aura pas d'IP interne et sera accessible uniquement à l'intérieur du cluster
+  clusterIP: None

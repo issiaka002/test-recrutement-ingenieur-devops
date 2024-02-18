@@ -1,4 +1,4 @@
-# PostgreSQL StatefulSet
+# Définition du StatefulSet pour PostgreSQL
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -24,27 +24,31 @@ spec:
             - name: postgresql-storage
               mountPath: /var/lib/postgresql/data
           env:
+            # Utilisation du nom d'utilisateur provenant du Secret 'postgres-secrets'
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
                   name: postgres-secrets
                   key: username
+            # Utilisation du mot de passe provenant du Secret 'postgres-secrets'
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: postgres-secrets
                   key: password
+            # Utilisation du chemin de stockage de données provenant de la ConfigMap 'db-config'
             - name: PGDATA
               valueFrom:
                 configMapKeyRef:
                   name: db-config
                   key: pgdata
+            # Utilisation du nom de la base de données provenant de la ConfigMap 'db-config'
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   name: db-config
                   key: dbName
-  # Volume Claim
+  # Définition du modèle de demande de volume
   volumeClaimTemplates:
     - metadata:
         name: postgresql-storage
@@ -53,5 +57,3 @@ spec:
         resources:
           requests:
             storage: 1Gi
-      
- 

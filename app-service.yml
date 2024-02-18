@@ -1,13 +1,25 @@
-apiVersion: v1 # Kubernetes API version
-kind: Service # Kubernetes resource kind we are creating
-metadata: # Metadata of the resource kind we are creating
+# Version de l'API Kubernetes
+apiVersion: v1
+# Type de ressource Kubernetes que nous créons
+kind: Service
+# Métadonnées de la ressource que nous créons
+metadata:
+  # Nom du service que nous créons
   name: app-test-svc
+  # Namespace dans lequel se trouve le service
   namespace: app
+# Spécification du service
 spec:
+  # Sélecteur qui identifie les pods associés à ce service
   selector:
     app: app-test
+  # Définition des ports exposés par le service
   ports:
+    # Définition du protocole utilisé (TCP dans ce cas)
     - protocol: "TCP"
-      port: 8080 # The port that the service is running on in the cluster
-      targetPort: 8080 # The port exposed by the service
-  type: NodePort # type of the service.
+      # Port sur lequel le service s'exécute dans le cluster
+      port: 8080
+      # Port cible exposé par le service
+      targetPort: 8080
+  # Type de service (NodePort dans ce cas)
+  type: NodePort

@@ -5,13 +5,13 @@ kubectl api—resources | grep <nom_ressource>
 kubectl exec -it --namespace=db postgres-db-0 -- psql -h localhost -U root --password -p 5432 postgres-db
 
 ## Create docker registry secret
-k create secret docker-registry --namespace=app regsecret --docker-server=system.registry.eneci.net --docker-username=data354test --docker-password=2jYdk3G9
+kubectl create secret docker-registry --namespace=app regsecret --docker-server=system.registry.eneci.net --docker-username=data354test --docker-password=2jYdk3G9
 
 ## Check docker registry secret
-k get secret -n app appsecret --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+kubectl get secret -n app regsecret --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
 
 ## Ajouter mon email dans le fichier /app/data/mail.txt
-k exec <pods-name> -- sh -c 'echo "issiaka.sidibe19@inphb.ci" > /app/data/mail.txt'
+kubectl exec <pods-name> -- sh -c 'echo "issiaka.sidibe19@inphb.ci" > /app/data/mail.txt'
 k exec -ti <pods-name> -- sh
 
 ## Requete POST pour recuperer les codes
