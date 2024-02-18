@@ -19,29 +19,45 @@ Récupérer les codes de validations qui permettront de passer à la phase suiva
 Pour le deploiement du cluster kubernetes j'ai choisit minikube car j'avais déjà installé sur ma machine depuis longtemps.
 	installation minikube sur linux : 
 
-```bash
-	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 &&
-	sudo install minikube-linux-amd64 /usr/local/bin/minikube &&
-	minikube start --driver=docker
+```shell
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 &&
+sudo install minikube-linux-amd64 /usr/local/bin/minikube &&
+minikube start --driver=docker
 ```
 
 J'ai aussi installé microk8s sur une machine virtuelle 
 	installation microk8s sur linux : https://microk8s.io/docs/getting-started
 
 ```bash
-	sudo snap install microk8s --classic
-	sudo usermod -a -G microk8s $USER
-	sudo usermod -a -G microk8s $USER
-	sudo mkdir -p ~/.kube
-	sudo chown -f -R $USER ~/.kube
-	su - $USER
-	microk8s status --wait-ready
+sudo snap install microk8s --classic
+```
+```bash
+sudo usermod -a -G microk8s $USER
+```
+```bash
+sudo usermod -a -G microk8s $USER
+```
+```bash
+sudo mkdir -p ~/.kube
+```
+```bash
+sudo chown -f -R $USER ~/.kube
+```
+```bash
+su - $USER
+```
+```bash
+microk8s status --wait-ready
+```
+```bash
 	alias kubectl='microk8s kubectl'
 ```
 #### 1- Creation des differents namespaces
 
+```shell
 touch namespace.yml
-```bash
+```
+```yaml
 	apiVersion: v1
 	kind: Namespace
 	metadata:
@@ -52,7 +68,9 @@ touch namespace.yml
 	metadata:
   		name: app
 ```
+```shell
 kubectl apply -f namespace.yml
+```
 
 #### 1- Créer les manifestes kubernetes et déployer les applications postgresql (statefulset), app-test (deployement) en respectant les namespaces de chaque application (voir l'architecture ci-dessus)
 
