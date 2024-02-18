@@ -1,4 +1,4 @@
-# Resultat TEST DE RECRUTEMENT DEVOPS ENGINEER data354
+# Resultat TEST DE RECRUTEMENT DEVOPS ENGINEER data354 (issiaka.sidibe19@inphb.ci)
 
 Ce test avait pour objectif d'évaluer mes compétences dans la conception, la mise en place et la maintenance d'un cluster Kubernetes, ainsi que dans le déploiement d'applications sur ce cluster. Il nous permettra également de vérifier vos connaissances en tant qu'ingénieur logiciel dans son ensemble, et plus spécifiquement en tant qu'ingénieur système.
 
@@ -19,6 +19,8 @@ Récupérer les codes de validations qui permettront de passer à la phase suiva
 	"code1":"UOkhi-zjjzrbr.jzuzsv19@zegys.tz-gfjkxivj-us-jvimztv",
  	"code2":"HLR96-pzzphrh.zpkpil19@puwoi.jp-wvzanylz-ki-zlycpjl"
 }
+
+
 
 ##### + Etape de creation du cluster:
 
@@ -64,6 +66,8 @@ MicroK8s utilise une commande kubectl dans l’espace de noms pour éviter les c
 	alias kubectl='microk8s kubectl'
 ```
 
+
+
 ##### + La méthode utilisée pour pull l'image app-test du référentiel docker privé :
 
 Pour pull l'image app-test du référentiel docker privé j'ai suivie les etapes indiquées dans la documentation de kubernetes: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -105,12 +109,17 @@ La sortie donne:
 Ensuite il suffit d'utiliser le Secret *regsecret* dans mon manifest pour application app-test comme suite :
 ![manifest app-test ](captures/app.png)
 
+
+
+
 ##### + La méthode utilisée pour la modification du fichier /app/data/mail.txt :
 
 J'ai utilisé la commande :
 ```shell
 kubectl exec < pods-name > -n app -- sh -c 'echo "issiaka.sidibe19@inphb.ci" > /app/data/mail.txt'
 ```
+
+
 
 ##### + La méthode utilisée pour communiquer avec l'application depuis l'extérieur du cluster :
 
@@ -143,17 +152,20 @@ La sortie:
 ```shell
 192.168.49.2
 ```
-Ensuite avec Curl j'ai recuperer les codes:
+Ensuite avec Curl j'ai récuperé les codes:
 ```shell
 curl -X POST \
   -H "Content-Type: application/json" \
   -H "Apikey: issiaka.sidibe19@inphb.ci" \
   http://192.168.49.2:31051/codes
 ```
-J'ai recuperé le port de l'application grace a la commande:
+J'ai récuperé le port de l'application grace a la commande:
 ```shell
 kubectl get svc -n app
 ```
+
+
+
 
 ##### + La capture d'écran du client REST comprenant la requête et sa réponse :
 ![client REST ](captures/reponse.png)
